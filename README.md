@@ -92,13 +92,12 @@ python3 FileSecureSuite_1_0_2.py
 
 ### Main Features
 
-1. **Encrypt Files** - Secure files with AES-256-GCM
-2. **Decrypt Files** - Restore encrypted files
-3. **Text Encryption** - Encrypt/decrypt text directly
-4. **Generate Keys** - Create RSA-4096 key pairs
-5. **Manage Keys** - Import/export encryption keys
-6. **View Audit Logs** - Track encryption operations
-7. **Lightning Network Donations** - Support development via QR code
+1. **Generate Keys** - Create RSA-4096 key pairs
+2. **Encrypt Text or Files** - Secure files with AES-256-GCM or RSA-4096
+3. **Decrypt Files** - Restore encrypted files
+4. **Decrypt Text** - Restore encrypted text
+5. **View Audit Logs** - Track encryption operations
+6. **Lightning Network Donations** - Support development via QR code
 
 ---
 
@@ -168,12 +167,6 @@ sudo apt install eog
 # Or use xdg-open (usually pre-installed)
 xdg-open qrcode/lightning_qrcode.png
 ```
-
----
-
-## Contributing
-
-Contributions welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
