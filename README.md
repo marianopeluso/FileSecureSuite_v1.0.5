@@ -1,8 +1,8 @@
-# FileSecureSuite v1.0.3
+# FileSecureSuite v1.0.4
 
 Enterprise-grade file encryption with AES-256-GCM and RSA-4096.
 
-![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.4-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
@@ -18,15 +18,16 @@ Enterprise-grade file encryption with AES-256-GCM and RSA-4096.
 - **Interactive CLI** - User-friendly terminal interface with progress bars
 - **HMAC Verification** - Integrity checking for all encrypted data
 - **Multi-Environment Support** - Works on Desktop, Headless, Remote Desktop
+- **Complete Filename Preservation** - Original filenames retained during encryption
 
 ---
 
-## What's New in v1.0.3
+## What's New in v1.0.4
 
-✅ **QR Code Display Overhaul** - Now displays as ASCII art in terminal  
-✅ **Improved Navigation** - Unified menu system with consistent flow  
-✅ **Removed File I/O** - No more .qrcode directory creation  
-✅ **Cross-Platform Optimized** - Better terminal compatibility  
+✅ **Filename Preservation Fixed** - Complete filenames now retained during encryption  
+✅ **AES & RSA Enhanced** - Improved both encryption methods  
+✅ **Cross-Platform Enhanced** - Better filename handling across all platforms  
+✅ **Production Stable** - Enhanced reliability and consistency  
 
 [See full changelog](CHANGELOG.md)
 
@@ -39,11 +40,11 @@ Enterprise-grade file encryption with AES-256-GCM and RSA-4096.
 ```bash
 # Windows
 python -m pip install -r requirements.txt
-python FileSecureSuite_1_0_2.py
+python FileSecureSuite_1_0_4.py
 
 # macOS / Linux
 python3 -m pip install -r requirements.txt
-python3 FileSecureSuite_1_0_2.py
+python3 FileSecureSuite_1_0_4.py
 ```
 
 ### Automated Installers
@@ -87,18 +88,18 @@ All automatically installed:
 Launch the application:
 
 ```bash
-python3 FileSecureSuite_1_0_2.py
+python3 FileSecureSuite_1_0_4.py
 ```
 
 ### Main Features
 
-1. **Encrypt Files** - Secure files with AES-256-GCM
-2. **Decrypt Files** - Restore encrypted files
-3. **Text Encryption** - Encrypt/decrypt text directly
+1. **Encrypt Files** - Secure files with AES-256-GCM or RSA-4096
+2. **Decrypt Files** - Restore encrypted files with integrity verification
+3. **Text Encryption** - Encrypt/decrypt text directly in terminal
 4. **Generate Keys** - Create RSA-4096 key pairs
 5. **Manage Keys** - Import/export encryption keys
 6. **View Audit Logs** - Track encryption operations
-7. **Lightning Network Donations** - Support development via QR code
+7. **Lightning Network Support** - Support development via QR code
 
 ---
 
@@ -106,10 +107,10 @@ python3 FileSecureSuite_1_0_2.py
 
 | Platform | Status | Notes |
 |----------|--------|-------|
-| Windows 10/11 | ✅ Full Support | Native QR viewer |
-| Linux Desktop | ✅ Full Support | Requires eog or xdg-open |
-| macOS | ✅ Full Support | Uses Preview app |
-| Kali Linux (Headless) | ✅ Full Support | Shows file path |
+| Windows 10/11 | ✅ Full Support | Native terminal support |
+| Linux Desktop | ✅ Full Support | All desktop environments |
+| macOS | ✅ Full Support | Intel & Apple Silicon |
+| Kali Linux (Headless) | ✅ Full Support | SSH terminal compatible |
 | Remote Desktop | ✅ Full Support | Auto-detects environment |
 
 ---
@@ -122,6 +123,7 @@ python3 FileSecureSuite_1_0_2.py
 - File permissions restricted to owner only
 - HMAC-based integrity verification
 - Cross-platform compatibility tested
+- Complete audit logging of all operations
 
 ---
 
@@ -160,14 +162,24 @@ python -m pip install cryptography  # Windows
 python3 -m pip install cryptography  # Linux/macOS
 ```
 
-### QR Code Not Displaying (Linux)
-```bash
-# Install eog for better QR code viewing
-sudo apt install eog
+### Encrypted Files Not Decrypting
+- Ensure correct encryption format (.aes, .rsa, or .aes.b64, .rsa.b64)
+- Verify correct password or private key
+- Check audit log for operation history
 
-# Or use xdg-open (usually pre-installed)
-xdg-open qrcode/lightning_qrcode.png
-```
+---
+
+## File Format
+
+### Encrypted File Naming
+- Original filename is preserved and included in the encrypted filename
+- Format: `encrypted_<original_filename>_<timestamp>_<random>.aes|.rsa`
+- Base64 versions also supported: `.aes.b64`, `.rsa.b64`
+
+### Supported Encryption Methods
+- **AES-256-GCM** - Password-based symmetric encryption
+- **RSA-4096** - Asymmetric encryption with optional key password
+- **Hybrid Mode** - RSA key exchange with AES data encryption
 
 ---
 
@@ -191,5 +203,21 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 
 ---
 
-**FileSecureSuite v1.0.3** - Enterprise encryption for everyone  
-*Last Updated: 2025-11-16*
+## Release Notes
+
+### v1.0.4 Highlights
+- ✅ Fixed filename truncation during encryption
+- ✅ Improved user interface flow
+- ✅ Better batch processing support
+- ✅ Cleaner post-operation experience
+
+### Previous Versions
+- v1.0.3: ASCII QR code display improvements
+- v1.0.2: Cross-platform QR viewer fixes
+- v1.0.1: Line ending and encoding fixes
+- v1.0.0: Initial release with core encryption features
+
+---
+
+**FileSecureSuite v1.0.4** - Enterprise encryption for everyone  
+*Last Updated: 2025-11-17*

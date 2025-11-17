@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.4] - 2025-11-17
+
+### Fixed
+- **Encrypted filename truncation issue**
+  - Removed 25-character limit on original filenames in encrypted output
+  - Files now retain complete names during encryption process
+  - Affected both AES-256-GCM and RSA-4096 encryption modes
+  - Fixed in single-file encryption operations
+
+### Technical Details
+- Filename preservation now supports full path lengths
+- Cross-platform filename handling maintained
+- All encryption formats (AES, RSA, Base64) updated
+
+---
+
 ## [1.0.3] - 2025-11-16
 
 ### Improved
@@ -104,17 +120,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned for v1.1.0
 - Command-line interface improvements (argparse)
 - Performance optimizations
-- Better error messages
-- Password strength meter
+- Enhanced error messages
+- Password strength meter UI improvements
 
 ### Planned for v2.0.0
 - GUI application (Tkinter/PyQt)
 - Streaming encryption for large files
 - Compression before encryption
 - Certificate-based encryption
+- Advanced batch processing with filters
 
 ---
 
-**Current Version:** 1.0.3  
-**Release Date:** 2025-11-16  
+**Current Version:** 1.0.4  
+**Release Date:** 2025-11-17  
 **Status:** Production Ready
