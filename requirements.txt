@@ -1,8 +1,16 @@
-# FileSecureSuite Requirements
-# Install with: pip install -r requirements.txt
+# FileSecureSuite v1.0.5 - Python Dependencies
 
+# REQUIRED DEPENDENCIES
+# These are essential for core encryption/decryption functionality
 cryptography>=41.0.0
-qrcode[pil]>=8.0
-colorama>=0.4.6
-tqdm>=4.66.0
-pyperclip>=1.8.2
+
+# OPTIONAL DEPENDENCIES
+# These enhance features but are not required
+# The application gracefully degrades if these are not installed
+colorama>=0.4.6        # Terminal colors and styling (especially useful on Windows)
+pyperclip>=1.8.2       # Clipboard copy/paste operations for sharing encrypted data
+qrcode[pil]>=8.0       # QR code generation for key visualization
+Pillow>=10.0.0         # Image processing library (required by qrcode[pil])
+
+# PYTHON VERSION REQUIREMENT
+# Requires: Python 3.8 or higher

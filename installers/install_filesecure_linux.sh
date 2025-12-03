@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# FileSecureSuite - Linux/Unix Installation Script
+# FileSecureSuite v1.0.5 - Linux Installation Script
 # This script checks for Python, optionally creates a venv, and installs dependencies
 
 echo ""
 echo "================================================================================"
-echo "                    FileSecureSuite - Linux Installation"
+echo "                  FileSecureSuite v1.0.5 - Linux Installation"
 echo "================================================================================"
 echo ""
 
@@ -92,13 +92,28 @@ echo ""
 echo "[INFO] Installing dependencies..."
 echo ""
 
-DEPS="cryptography qrcode[pil] colorama tqdm pyperclip"
+# Required dependency
+echo "   - Installing cryptography (REQUIRED)..."
+pip3 install --quiet "cryptography>=41.0.0"
+if [ $? -ne 0 ]; then
+    echo "   [ERROR] cryptography installation failed. This is required."
+    exit 1
+else
+    echo "   [OK] cryptography installed"
+fi
+echo ""
 
-for dep in $DEPS; do
+# Optional dependencies with graceful fallback
+echo "[INFO] Installing optional dependencies (graceful fallback if failed)..."
+echo ""
+
+OPTIONAL_DEPS="colorama>=0.4.6 pyperclip>=1.8.2 qrcode[pil]>=8.0"
+
+for dep in $OPTIONAL_DEPS; do
     echo "   - Installing $dep..."
     pip3 install --quiet "$dep"
     if [ $? -ne 0 ]; then
-        echo "   [WARNING] $dep installation had issues, but continuing..."
+        echo "   [WARNING] $dep installation failed (this is optional, continuing)"
     else
         echo "   [OK] $dep installed"
     fi
@@ -114,7 +129,7 @@ if [ "$VENV_CREATED" = true ]; then
     echo "[INFO] Virtual environment is ACTIVE"
     echo ""
     echo "To launch FileSecureSuite:"
-    echo "  python3 FileSecureSuite_1_0_0.py"
+    echo "  python3 FileSecureSuite_1_0_5.py"
     echo ""
     echo "When done, deactivate the venv with:"
     echo "  deactivate"
@@ -123,11 +138,21 @@ else
     echo "[INFO] No virtual environment was created"
     echo ""
     echo "To launch FileSecureSuite:"
-    echo "  python3 FileSecureSuite_1_0_0.py"
+    echo "  python3 FileSecureSuite_1_0_5.py"
     echo ""
 fi
 
-echo "[NOTE] Make sure FileSecureSuite_1_0_0.py is in: $CURRENT_DIR"
+echo "[NOTE] Make sure FileSecureSuite_1_0_5.py is in: $CURRENT_DIR"
+echo ""
+echo "================================================================================"
+echo ""
+echo "[INFO] Optional Features:"
+echo "   - Colored output: requires colorama"
+echo "   - QR code generation: requires qrcode[pil]"
+echo "   - Clipboard operations: requires pyperclip"
+echo ""
+echo "If any optional dependency failed to install, FileSecureSuite will continue"
+echo "to work with graceful fallback (some features may be limited)."
 echo ""
 echo "================================================================================"
 echo ""

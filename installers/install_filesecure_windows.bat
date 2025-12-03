@@ -1,12 +1,12 @@
 @echo off
-REM FileSecureSuite - Windows Installation Script
+REM FileSecureSuite v1.0.5 - Windows Installation Script
 REM This script checks for Python, optionally creates a venv, and installs dependencies
 
 setlocal enabledelayedexpansion
 
 echo.
 echo ================================================================================
-echo                    FileSecureSuite - Windows Installation
+echo                  FileSecureSuite v1.0.5 - Windows Installation
 echo ================================================================================
 echo.
 
@@ -100,13 +100,29 @@ REM Install dependencies
 echo [INFO] Installing dependencies...
 echo.
 
-set "deps=cryptography qrcode[pil] colorama tqdm pyperclip"
+REM Required dependency
+echo   - Installing cryptography (REQUIRED)...
+pip install --quiet cryptography>=41.0.0
+if errorlevel 1 (
+    echo   [ERROR] cryptography installation failed. This is required.
+    pause
+    exit /b 1
+) else (
+    echo   [OK] cryptography installed
+)
+echo.
 
-for %%d in (%deps%) do (
+REM Optional dependencies with graceful fallback
+echo [INFO] Installing optional dependencies (graceful fallback if failed)...
+echo.
+
+set "optional_deps=colorama>=0.4.6 pyperclip>=1.8.2 qrcode[pil]>=8.0"
+
+for %%d in (%optional_deps%) do (
     echo   - Installing %%d...
     pip install --quiet %%d
     if errorlevel 1 (
-        echo   [WARNING] %%d installation had issues, but continuing...
+        echo   [WARNING] %%d installation failed (this is optional, continuing)
     ) else (
         echo   [OK] %%d installed
     )
@@ -122,7 +138,7 @@ if /i "%VENV_CHOICE%"=="y" (
     echo [INFO] Virtual environment is ACTIVE
     echo.
     echo To launch FileSecureSuite:
-    echo   python FileSecureSuite_1_0_0.py
+    echo   python FileSecureSuite_1_0_5.py
     echo.
     echo When done, deactivate the venv with:
     echo   deactivate
@@ -131,11 +147,21 @@ if /i "%VENV_CHOICE%"=="y" (
     echo [INFO] No virtual environment was created
     echo.
     echo To launch FileSecureSuite:
-    echo   python FileSecureSuite_1_0_0.py
+    echo   python FileSecureSuite_1_0_5.py
     echo.
 )
 
-echo [NOTE] Make sure FileSecureSuite_1_0_0.py is in: %CURRENT_DIR%
+echo [NOTE] Make sure FileSecureSuite_1_0_5.py is in: %CURRENT_DIR%
+echo.
+echo ================================================================================
+echo.
+echo [INFO] Optional Features:
+echo   - Colored output: requires colorama
+echo   - QR code generation: requires qrcode[pil]
+echo   - Clipboard operations: requires pyperclip
+echo.
+echo If any optional dependency failed to install, FileSecureSuite will continue
+echo to work with graceful fallback (some features may be limited).
 echo.
 echo ================================================================================
 echo.

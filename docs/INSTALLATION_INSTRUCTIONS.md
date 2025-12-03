@@ -1,4 +1,4 @@
-# FileSecureSuite - Installation Guide
+# FileSecureSuite v1.0.5 - Installation Guide
 
 ## System Requirements
 
@@ -21,7 +21,7 @@
 
 2. **Prepare Installation Directory**
    - Download the `install_filesecure_windows.bat` file
-   - Download `FileSecureSuite_1_0_0.py` file
+   - Download `FileSecureSuite_1_0_5.py` file
    - Place BOTH files in the same folder (e.g., Desktop or Downloads)
 
 3. **Run the Installer**
@@ -31,12 +31,13 @@
    - The installer will:
      - Check for Python
      - Ask if you want a virtual environment
-     - Install all dependencies
+     - Install cryptography (required)
+     - Install optional features (colorama, qrcode, pyperclip)
      - Confirm when ready to launch
 
 4. **Launch FileSecureSuite**
    - Open Command Prompt in the same directory
-   - Run: `python FileSecureSuite_1_0_0.py`
+   - Run: `python FileSecureSuite_1_0_5.py`
 
 ---
 
@@ -52,7 +53,7 @@
 
 2. **Prepare Installation Directory**
    - Download the `install_filesecure_linux.sh` file
-   - Download `FileSecureSuite_1_0_0.py` file
+   - Download `FileSecureSuite_1_0_5.py` file
    - Place BOTH files in the same folder
    - Make the script executable: `chmod +x install_filesecure_linux.sh`
 
@@ -62,12 +63,13 @@
    - The installer will:
      - Check for Python 3
      - Ask if you want a virtual environment
-     - Install all dependencies
+     - Install cryptography (required)
+     - Install optional features (colorama, qrcode, pyperclip)
      - Confirm when ready to launch
 
 4. **Launch FileSecureSuite**
    - If you created a venv: `source venv/bin/activate`
-   - Run: `python3 FileSecureSuite_1_0_0.py`
+   - Run: `python3 FileSecureSuite_1_0_5.py`
 
 ---
 
@@ -84,7 +86,7 @@
 
 2. **Prepare Installation Directory**
    - Download the `install_filesecure_macos.sh` file
-   - Download `FileSecureSuite_1_0_0.py` file
+   - Download `FileSecureSuite_1_0_5.py` file
    - Place BOTH files in the same folder
    - Make the script executable: `chmod +x install_filesecure_macos.sh`
 
@@ -94,24 +96,29 @@
    - The installer will:
      - Check for Python 3
      - Ask if you want a virtual environment
-     - Install all dependencies
+     - Install cryptography (required)
+     - Install optional features (colorama, qrcode, pyperclip)
      - Confirm when ready to launch
 
 4. **Launch FileSecureSuite**
    - If you created a venv: `source venv/bin/activate`
-   - Run: `python3 FileSecureSuite_1_0_0.py`
+   - Run: `python3 FileSecureSuite_1_0_5.py`
 
 ---
 
 ## What Gets Installed?
 
-The installer automatically installs these dependencies:
+The installer automatically installs dependencies in two categories:
 
-- **cryptography** (Required) - AES-256-GCM and RSA-4096 encryption
-- **qrcode[pil]** - QR code generation for donations
-- **colorama** - Colored terminal output
-- **tqdm** - Progress bars for large files
-- **pyperclip** - Clipboard operations
+### Required Dependency
+- **cryptography ≥ 41.0.0** - AES-256-GCM and RSA-4096 encryption (MUST install)
+
+### Optional Dependencies (Graceful Fallback)
+- **colorama ≥ 0.4.6** - Colored terminal output
+- **qrcode[pil] ≥ 8.0** - QR code generation
+- **pyperclip ≥ 1.8.2** - Clipboard operations
+
+If any optional dependency fails to install, FileSecureSuite will continue working with reduced features. All optional features have fallback mechanisms.
 
 ---
 
@@ -156,13 +163,15 @@ python3 -m pip install cryptography
 
 If the installer fails:
 1. Make sure you have internet connection
-2. Try installing each dependency manually:
+2. Try installing cryptography manually (required):
    ```bash
-   pip install cryptography
-   pip install qrcode[pil]
-   pip install colorama
-   pip install tqdm
-   pip install pyperclip
+   pip install cryptography>=41.0.0
+   ```
+3. Optional dependencies can be installed separately if needed:
+   ```bash
+   pip install colorama>=0.4.6
+   pip install qrcode[pil]>=8.0
+   pip install pyperclip>=1.8.2
    ```
 
 ### Permission Denied (Linux/macOS)
@@ -172,6 +181,16 @@ If you get "Permission denied":
 chmod +x install_filesecure_linux.sh
 bash install_filesecure_linux.sh
 ```
+
+### Missing Optional Features
+
+If colored output, QR codes, or clipboard features don't work:
+1. Check if optional dependencies installed (see installer output)
+2. FileSecureSuite still works without them
+3. Install manually if desired:
+   ```bash
+   pip install colorama qrcode[pil] pyperclip
+   ```
 
 ---
 
@@ -194,13 +213,33 @@ bash install_filesecure_linux.sh
 **Windows:**
 ```cmd
 python -m pip install cryptography
-python FileSecureSuite_1_0_0.py
+python FileSecureSuite_1_0_5.py
 ```
 
 **Linux/macOS:**
 ```bash
 python3 -m pip install cryptography
-python3 FileSecureSuite_1_0_0.py
+python3 FileSecureSuite_1_0_5.py
+```
+
+---
+
+## Manual Installation (Without Installer)
+
+If the installer doesn't work:
+
+**Windows:**
+```cmd
+python -m pip install cryptography>=41.0.0
+python -m pip install colorama qrcode[pil] pyperclip
+python FileSecureSuite_1_0_5.py
+```
+
+**Linux/macOS:**
+```bash
+python3 -m pip install cryptography>=41.0.0
+python3 -m pip install colorama qrcode[pil] pyperclip
+python3 FileSecureSuite_1_0_5.py
 ```
 
 ---
@@ -211,9 +250,11 @@ If you encounter issues:
 
 1. Check that Python 3.8+ is installed: `python --version` (or `python3 --version`)
 2. Check that pip is available: `pip --version` (or `pip3 --version`)
-3. Ensure both `install_*.sh/.bat` and `FileSecureSuite_1_0_0.py` are in the same directory
-4. Try running the installer again
+3. Ensure both `install_*.sh/.bat` and `FileSecureSuite_1_0_5.py` are in the same directory
+4. Check [SECURITY.md](SECURITY.md) for security best practices
+5. See [CHANGELOG.md](CHANGELOG.md) for what's new in v1.0.5
 
 ---
 
-**FileSecureSuite v1.0 - Enterprise Encryption Suite**
+**FileSecureSuite v1.0.5 - Enterprise Encryption Suite**  
+*Last Updated: 2025-12-02*

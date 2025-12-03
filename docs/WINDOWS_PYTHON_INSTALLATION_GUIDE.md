@@ -1,6 +1,6 @@
 # Windows Python Installation Guide
 
-## Step-by-Step Instructions with Screenshots
+## Step-by-Step Instructions
 
 ### Step 1: Download Python
 
@@ -28,7 +28,7 @@
 ☑ Add Python 3.xx to PATH
 ```
 
-**MUST be CHECKED (✓) - This is CRITICAL!**
+**MUST be CHECKED (☑) - This is CRITICAL!**
 
 If you miss this step, Python won't work from Command Prompt!
 
@@ -60,7 +60,7 @@ Advanced Options:
 ☑ Add Python to environment variables
 ```
 
-**ALL of these should be CHECKED (✓)**
+**ALL of these should be CHECKED (☑)**
 
 The key one is: **"Add Python to environment variables"**
 
@@ -155,7 +155,19 @@ If Python works but pip doesn't:
 
 ---
 
+### Issue: "permission denied" or "access denied"
+
+**Solution:**
+
+1. Right-click Command Prompt
+2. Select "Run as Administrator"
+3. Try the command again
+
+---
+
 ## Once Python is Working
+
+### Quick Start (2 minutes)
 
 1. Open Command Prompt
 2. Navigate to your FileSecureSuite folder:
@@ -169,8 +181,22 @@ If Python works but pip doesn't:
    ```
 
 4. Follow the prompts
+5. Done! ✅
 
-Done! ✅
+---
+
+### Manual Installation (If Installer Fails)
+
+```cmd
+# Install required cryptography library
+python -m pip install cryptography>=41.0.0
+
+# Install optional features (if desired)
+python -m pip install colorama qrcode[pil] pyperclip
+
+# Launch FileSecureSuite
+python FileSecureSuite_1_0_5.py
+```
 
 ---
 
@@ -204,22 +230,50 @@ Advanced Options:
 
 ---
 
-## After Installation - Next Steps
+## After Python Installation - Next Steps
 
 Once Python is verified working:
 
-1. Download FileSecureSuite_Installation.zip
-2. Extract it
-3. Put all files in same folder with FileSecureSuite_1_0_0.py
-4. Run install_filesecure_windows.bat
-5. Done!
+1. Download FileSecureSuite files:
+   - `install_filesecure_windows.bat`
+   - `FileSecureSuite_1_0_5.py`
+
+2. Put both files in the same folder
+
+3. Run the installer:
+   ```cmd
+   install_filesecure_windows.bat
+   ```
+
+4. Follow prompts
+
+5. Launch:
+   ```cmd
+   python FileSecureSuite_1_0_5.py
+   ```
+
+Done! 🎉
 
 ---
 
-**Key Takeaway:**
+## Key Takeaway
 
-❗ **The most common problem is forgetting to check "Add Python to PATH"**
+🔑 **The most common problem is forgetting to check "Add Python to PATH"**
 
 If installation doesn't work, this is 99% of the time the reason!
 
-Re-install and make sure this box is CHECKED! ✓
+**Re-install and make sure this box is CHECKED! ☑**
+
+---
+
+## Need Help?
+
+- **Can't find Python installer option?** - Check YouTube for "Python installation Windows" with your Python version
+- **Still seeing "not recognized"?** - Your PATH wasn't updated. Uninstall and reinstall.
+- **Command Prompt not finding Python?** - Open a NEW Command Prompt window after installation
+- **Other issues?** - See [INSTALLATION_INSTRUCTIONS.md](INSTALLATION_INSTRUCTIONS.md)
+
+---
+
+**FileSecureSuite v1.0.5 - Enterprise Encryption Suite**  
+*Last Updated: 2025-12-02*

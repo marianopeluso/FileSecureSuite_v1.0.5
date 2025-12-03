@@ -7,6 +7,69 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.5] - 2025-12-02
+
+### Added
+- **Key Management System**
+  - New `backup_keys()` function for secure RSA key backup
+  - New `export_public_key()` function to extract public keys from private keys
+  - Dedicated keys directory with restricted permissions (700)
+  - Dedicated backup directory for key exports
+  - Password protection validation for key operations
+
+- **Enhanced Audit Logging**
+  - New audit log fields: `keyname`, `key_protected`, `key_fingerprint`
+  - Improved key operation tracking for compliance
+  - Key fingerprint calculation and logging
+  - Better log formatting and field alignment
+
+### Improved
+- **User Interface**
+  - New submenu structure for Encrypt/Decrypt operations
+  - Dedicated Key Management submenu in main navigation (option [4])
+  - Enhanced menu navigation with consistent "Back to Menu" options
+  - Password attempt tracking with exponential backoff (2^n seconds)
+  - Better error messaging for key operations
+  - Consistent emoji indicators for all menu options
+
+- **Backup Functionality**
+  - Support for selective key backup (users can choose specific keys by number)
+  - Automatic backup directory creation with secure permissions (0o700)
+  - Individual success/failure reporting for each key backup
+  - Duplicate detection in user input with automatic removal
+  - Comprehensive logging of backup operations with key counts
+  - Two backup modes: backup all keys or select specific keys
+
+- **Dependency Management**
+  - QRCode and PIL now optional with graceful fallback (HAS_QRCODE flag)
+  - Removed automatic pip installation of qrcode[pil]
+  - Removed tqdm dependency
+  - Added threading support for background clipboard operations
+
+- **Security**
+  - New `validate_password_strength_key()` function for stricter key password validation
+  - Key passwords now require: 12+ chars, uppercase, lowercase, digit, and special char
+  - PBKDF2 iterations increased from 480000 to 600000 (OpenSSL 3.0 default)
+  - Explicit PBKDF2_HASH_ALGORITHM constant (SHA-256)
+  - Background clipboard auto-clear using threading
+
+- **Code Quality**
+  - Removed debug statements from password input handling
+  - Improved documentation and inline comments
+  - Better constant definitions (AES_KEY_SIZE, PBKDF2_HASH_ALGORITHM)
+  - Enhanced log entry formatting (operation field: 12 → 15 chars)
+
+### Technical Details
+- Key management menu added to main interface with submenu structure
+- Key backup includes fingerprint calculation and audit logging
+- Public key export with validation, password attempt handling, and logging
+- All key directories created with secure 0o700 permissions
+- Clipboard clear operations now non-blocking with threading
+- Exponential backoff implementation: 2^n seconds between failed password attempts
+- Selective backup validation prevents invalid key selections
+
+---
+
 ## [1.0.4] - 2025-11-17
 
 ### Fixed
@@ -132,6 +195,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-**Current Version:** 1.0.4  
-**Release Date:** 2025-11-17  
+**Current Version:** 1.0.5  
+**Release Date:** 2025-12-02  
 **Status:** Production Ready
