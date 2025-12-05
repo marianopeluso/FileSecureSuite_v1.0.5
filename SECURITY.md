@@ -40,8 +40,8 @@ gpg --verify filesecuresuite.zip.asc filesecuresuite.zip
 **Expected output:**
 ```
 gpg: Signature made [DATE]
-gpg:                using RSA key [KEY_ID]
-gpg: Good signature from "Mariano Peluso <mariano@peluso.me>" [unknown]
+gpg:                using RSA key F20494B9FAB53C10
+gpg: Good signature from "Mariano Peluso <mariano@peluso.me>"
 ```
 
 ✅ **"Good signature"** means the file is authentic and hasn't been tampered with.
